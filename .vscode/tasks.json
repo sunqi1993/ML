@@ -1,0 +1,12 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    //直接运行python解决乱码 set pythonencoding utf8
+     // "command": "C:/run.bat",
+     // "C:/Users/sunqi/Desktop/run.bat",
+    "version": "0.1.0",
+    "command": "python",
+    "isShellCommand": true,
+    "args": ["${file}"],
+    "showOutput": "always"
+
+}
