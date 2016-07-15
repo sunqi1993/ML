@@ -31,7 +31,7 @@ theta1=np.random.random((1,y.shape[1]))
 theta0=np.random.random((1,10))
 
 #学习率
-alpha=0.01
+alpha=0.001
 i=1
 #非线性函数
 def sigmoid(x):
@@ -41,7 +41,7 @@ while 1:
     i+=1
     b=sigmoid(np.dot(v,x.T)-np.tile(theta0.T,(1,xrow)))
     y_o=sigmoid(np.dot(w,b)-np.tile(theta1,(1,17))).T
-    if abs(np.sum((y-y_o)**2))<0.05:
+    if abs(np.sum((y-y_o)**2))<0.005:
         print('v=%s\nw=%s\ntheta0=%s\ntheta1=%s\ny.T=%s\ny_o.T=%s\n' %(v,w,theta0,theta1,y.T,y_o.T))
         print(i)
         break
