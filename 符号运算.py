@@ -13,5 +13,3 @@ for j in range(60000):
     syn1 += l1.T.dot(l2_delta)
     if j==1:print(l1,'\n',l2_delta)
     syn0 += X.T.dot(l1_delta)
-
-git remote add origin git@github.com/sunqi1993/ML.git
