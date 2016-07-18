@@ -34,11 +34,13 @@ class  NetWork(object):
     
     #前相通路计算输出
     def feedfoward(self,a):
+        k=[a]
         for b,w in zip(self.biases,self.weights):
-            a=sigmoid(np.dot(w,a)+b
-        return a
+            a=sigmoid(np.dot(w,a)+b)
+            k.append(a)
+        return a,k
     
-    #误差逆向传播算法
+    #误差逆向传播算法 计算出梯度
     def backprop(self,x,y):
         list_w=[np.zeros(w.shape) for w in self.weights]
         list_b=[np.zeros(b.shape) for b in self.biases]
@@ -46,6 +48,7 @@ class  NetWork(object):
         activation=x
         activations=[x] 
         zs=[]
+        dw,db=[],[]
         #计算前向输出
         for b,w in zip(self.biases,self.weights):
             z=np.dot(w,activation)+b
@@ -53,6 +56,18 @@ class  NetWork(object):
             activation=sigmoid(z)
             activations.append(activation)
 
+        lenth=len(zs)
+        #求出逆向误差传播梯度值
+        for i in range(lenth).__reversed__():
+            if i==lenth-1:delta=y*(1-activations[i+1])*activations[i+1]
+            #delta_l=w_(l+1).transpose() X delta_l+1 *a_l*(1-a_l)
+            else:delta=np.dot(self.weights[i].T,delta)*(1-activations[i+1])*activations[i+1]
+            delta_w=delta*activations[i].T
+            delta_b=delta
+            dw.insert(0,delta_w)
+            db.insert(0,delta_b)
+        return db,dw
+        
 
 
     def update_mini_batch(self,mini_batch,eta):
